@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.scss';
 import {
     createBrowserRouter,
@@ -8,14 +8,16 @@ import {
 
 import BreedDetails from "./details/BreedDetails";
 import Home from "./home/Home";
+import ErrorPage from "./error/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Home />,
+        errorElement: <ErrorPage />,
     },
     {
-        path: "/breed/:breedId",
+        path: "/breed/:id",
         element: <BreedDetails />,
     },
 ]);
