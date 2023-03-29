@@ -9,7 +9,7 @@ breeds.init();
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get("/api/v1/search", (req, res) => {
+app.get("/api/v1/search", (req, res, next) => {
 
   if(!req.params) {
     res.json([]); // return empty;
@@ -17,8 +17,15 @@ app.get("/api/v1/search", (req, res) => {
     res.json([]); // return empty
   }
   let breed = req.query?.breed;
-  //res.json(breeds.all());
-  res.json(breeds.findByName(breed));
+  breeds.findByName(breed)
+      .then(data => res.json(data))
+      .catch(next);
+});
+
+app.get("/api/v1/breed/:id", (req, res, next) => {
+  breeds.getBreedById(req.params.id)
+      .then(data => res.json(data))
+      .catch(next);
 });
 
 // All other GET requests not handled before will return our React app
