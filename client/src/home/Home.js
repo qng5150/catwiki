@@ -2,14 +2,13 @@ import React, {useState} from "react";
 import "./home.scss";
 import logo from "../images/logo.svg"
 import SearchResults from "./SearchResults";
-import cors from "../utils/cors";
 
 let apiUrl = process.env.REACT_APP_BASE_URL;
 
 function Home() {
     const [searchResults, setSearchResults] = useState([]);
     function handleTypeAhead(event) {
-        fetch(`${apiUrl}/search?breed=${event.target.value}`, cors.options)
+        fetch(`${apiUrl}/search?breed=${event.target.value}`)
             .then((res) => res.json())
             .then((data) => {
                 setSearchResults(data);

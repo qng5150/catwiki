@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import cors from "../utils/cors";
 
 let apiUrl = process.env.REACT_APP_BASE_URL;
 function BreedDetails() {
     const { id } = useParams();
     const [breed, setBreed] = useState({});
     React.useEffect(() => {
-        const fetchData = fetch(`${apiUrl}/breed/${id}`, cors.options);
+        const fetchData = fetch(`${apiUrl}/breed/${id}`);
         fetchData
             .then((res) => res.json())
             .then((data) => setBreed(data));
