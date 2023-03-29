@@ -48,6 +48,12 @@ Use static site for the client.<br/>
 - Build Command: yarn build
 - Publish Directory: (client/)buid
 
+Cors setting<br/>
+In Headers add:
+- Path: /
+- Header: Access-Control-Allow-Origin
+- Value: *
+
 ## Server
 ### Starting the server locally:
 In the root directory:<br/>
