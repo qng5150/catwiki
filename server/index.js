@@ -3,7 +3,9 @@ const cors = require('cors')
 const express = require("express");
 const breeds = require('./breeds/breeds');
 const PORT = process.env.PORT || 3001;
-
+const headers = {'Content-Type':'application/json',
+  'Access-Control-Allow-Origin':'*',
+  'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
 const app = express();
 app.use(cors());
 
@@ -21,7 +23,10 @@ app.get("/api/v1/search", (req, res, next) => {
   }
   let breed = req.query?.breed;
   breeds.findByName(breed)
-      .then(data => res.json(data))
+      .then(data => {
+        res.headers = headers;
+        res.json(data)
+      })
       .catch(next);
 });
 
@@ -29,6 +34,7 @@ app.get("/api/v1/breed/:id", (req, res, next) => {
 
   breeds.getBreedById(req.params.id)
       .then(data => {
+        res.headers = headers;
         res.json(data);
       })
       .catch(next);
