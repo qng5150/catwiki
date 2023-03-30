@@ -9,7 +9,7 @@ const headers = {'Content-Type':'application/json',
 const app = express();
 app.use(cors());
 
-await breeds.init();
+breeds.init().then(()=> Promise.resolve());
 
 
 // Have Node serve the files for our built React app
