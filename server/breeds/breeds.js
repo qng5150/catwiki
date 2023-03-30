@@ -1,13 +1,11 @@
+let allBreeds = [];
 
-
-let allBreeds;
-
-function init() {
-    fetch("https://api.thecatapi.com/v1/breeds")
+async function init() {
+    return fetch("https://api.thecatapi.com/v1/breeds")
         .then((response) => response.json())
         .then((data) => {
             allBreeds = data;
-        })
+        });
 }
 
 function all() {
@@ -16,6 +14,9 @@ function all() {
 
 async function findByName(name) {
     const MAX_RESULT = 10;
+    if (allBreeds.length === 0) {
+        await init();
+    }
     let filtered = allBreeds.filter(breed => breed.id.startsWith(name));
 
     if (filtered.length > MAX_RESULT) {
